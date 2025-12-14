@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Guilty Project - Hunt the Corrupt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            border: 2px solid #00ff00;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            background: #000;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        
+        .tagline {
+            font-size: 1.5em;
+            color: #ff0000;
+            margin-top: 10px;
+        }
+        
+        .mission {
+            border-left: 4px solid #ff0000;
+            padding-left: 20px;
+            margin: 40px 0;
+            font-size: 1.2em;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #333;
+            background: #0d0d0d;
+        }
+        
+        h2 {
+            color: #ff0000;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+        
+        .manifesto {
+            line-height: 1.8;
+        }
+        
+        .manifesto p {
+            margin-bottom: 15px;
+        }
+        
+        .targets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .target-box {
+            border: 1px solid #00ff00;
+            padding: 15px;
+            text-align: center;
+            background: #000;
+        }
+        
+        .target-box:hover {
+            background: #0a0a0a;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        
+        .weapons {
+            list-style: none;
+            padding: 20px;
+        }
+        
+        .weapons li {
+            padding: 10px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .weapons li:before {
+            content: "▶ ";
+            color: #ff0000;
+        }
+        
+        .cta {
+            background: #ff0000;
+            color: #000;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 40px 0;
+            border: 3px solid #ff0000;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        
+        .cta:hover {
+            background: #000;
+            color: #ff0000;
+        }
+        
+        .status {
+            border: 2px dashed #ff0000;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+        
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #666;
+        }
+        
+        a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: #ff0000;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>THE GUILTY PROJECT</h1>
+            <div class="tagline">We Don't Defend the Innocent. We Hunt the Guilty.</div>
+        </header>
+
+        <div class="status">
+            <span class="blink">◉</span> STATUS: FORMING 501(c)(3) <span class="blink">◉</span>
+        </div>
+
+        <div class="mission">
+            <p><strong>MISSION:</strong> Expose, shame, fire, and imprison corrupt federal and state actors using strictly legal and ethical methods.</p>
+        </div>
+
+        <div class="section manifesto">
+            <h2>The Problem</h2>
+            <p>Investigative journalism is dead. Killed by tech, economics, and captured interests.</p>
+            <p>The Fourth Estate has fallen. Nobody's watching the watchers.</p>
+            <p>Prosecutors hide evidence. Public defenders betray clients. Judges refuse to recuse. Court clerks alter documents. They get away with it because nobody has the time, money, or patience to hunt them down.</p>
+            <p><strong>Until now.</strong></p>
+        </div>
+
+        <div class="section manifesto">
+            <h2>The Solution</h2>
+            <p>We're not another sad-sack charity begging for donations with stories of suffering.</p>
+            <p>We're a <strong>swarm intelligence prosecution machine</strong>.</p>
+            <p>Thousands of citizen-journalists. Patient as an ant colony. Relentless as a mob. Armed with FOIA requests, PACER access, public records laws, and the coordination to bring down even the most powerful corrupt actors.</p>
+            <p>One bureaucrat can stall one person. They can't stall a thousand.</p>
+            <p>One clerk can "lose" one document. They can't hide from an army with subpoena power.</p>
+        </div>
+
+        <div class="section">
+            <h2>Our Targets</h2>
+            <div class="targets">
+                <div class="target-box">
+                    <strong>PROSECUTORS</strong><br>
+                    Who hide evidence
+                </div>
+                <div class="target-box">
+                    <strong>PUBLIC DEFENDERS</strong><br>
+                    Who betray clients
+                </div>
+                <div class="target-box">
+                    <strong>JUDGES</strong><br>
+                    Who refuse to recuse
+                </div>
+                <div class="target-box">
+                    <strong>COURT STAFF</strong><br>
+                    Who alter documents
+                </div>
+                <div class="target-box">
+                    <strong>POLICE</strong><br>
+                    Who fabricate evidence
+                </div>
+                <div class="target-box">
+                    <strong>BUREAUCRATS</strong><br>
+                    Who obstruct justice
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Our Weapons</h2>
+            <ul class="weapons">
+                <li>FOIA requests (Death by a thousand cuts)</li>
+                <li>PACER access (They can't hide court records from everyone)</li>
+                <li>Public records laws (State actors work for us)</li>
+                <li>Forensic document analysis (Catch the forgeries)</li>
+                <li>Audio/video analysis (Prove the fabrications)</li>
+                <li>Social media amplification (Make it expensive to ignore)</li>
+                <li>Coordinated pressure campaigns (Swarm the corrupt)</li>
+                <li>Professional investigation (When needed, we hire experts)</li>
+            </ul>
+        </div>
+
+        <div class="section manifesto">
+            <h2>How We Win</h2>
+            <p><strong>Exposure.</strong> Corrupt actors rely on obscurity. We shine lights.</p>
+            <p><strong>Shame.</strong> Make their names synonymous with their crimes.</p>
+            <p><strong>Consequences.</strong> Disbarment. Termination. Criminal prosecution where possible.</p>
+            <p><strong>Deterrence.</strong> Make the next corrupt actor think twice.</p>
+        </div>
+
+        <div class="section manifesto">
+            <h2>What Makes Us Different</h2>
+            <p>We're not asking you to feel sorry for victims.</p>
+            <p>We're inviting you to <strong>hunt criminals who wear badges and robes</strong>.</p>
+            <p>We're not defenders of the downtrodden. We're <strong>prosecutors of the powerful</strong>.</p>
+            <p>We don't ask for money to help the innocent. We ask for money to <strong>destroy the guilty</strong>.</p>
+            <p>This is the first charity that's a <strong>bad ass</strong>.</p>
+        </div>
+
+        <div class="cta">
+            JOIN THE HUNT
+        </div>
+
+        <div class="section">
+            <h2>First Case: United States v. Channon</h2>
+            <p>Federal public defender conspired with prosecutor in secret meeting. Court clerk altered documents. Judges refused to recuse despite conflicts. Evidence: <a href="https://shouldi.care/evidence">shouldi.care/evidence</a></p>
+            <p><strong>They're still in office. Still doing it to others. Let's stop them.</strong></p>
+        </div>
+
+        <footer>
+            <p>The Guilty Project | 501(c)(3) in formation</p>
+            <p>Using legal and ethical methods to hunt corrupt officials</p>
+            <p><a href="https://shouldi.care/evidence">View Evidence Archive</a></p>
+        </footer>
+    </div>
+</body>
+</html>
