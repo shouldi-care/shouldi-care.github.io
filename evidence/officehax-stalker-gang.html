@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Officehax Stalker Gang | Evidence Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Crimson+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood: #8B0000;
+            --ink: #1a1a1a;
+            --paper: #f5f0e6;
+            --redact: #000;
+            --highlight: #ffef00;
+            --stamp: #c41e3a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
+            font-size: 18px;
+        }
+        
+        .classified-banner {
+            background: var(--blood);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 3px double var(--ink);
+            margin-bottom: 60px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+        
+        .case-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--blood);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #666;
+            margin-top: 15px;
+        }
+        
+        .stamp {
+            display: inline-block;
+            border: 3px solid var(--stamp);
+            color: var(--stamp);
+            padding: 10px 25px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transform: rotate(-3deg);
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+        
+        .summary-box {
+            background: white;
+            border-left: 4px solid var(--blood);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .summary-box h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--blood);
+        }
+        
+        .perpetrators {
+            display: grid;
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .perp-card {
+            background: white;
+            padding: 30px;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+        
+        .perp-card::before {
+            content: attr(data-role);
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--blood);
+            color: white;
+            padding: 4px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .perp-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            padding-top: 10px;
+        }
+        
+        .perp-card .title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .perp-card ul {
+            list-style: none;
+        }
+        
+        .perp-card li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #ddd;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .perp-card li::before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: var(--blood);
+            font-size: 10px;
+        }
+        
+        .evidence-section {
+            margin: 60px 0;
+            padding-top: 40px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .evidence-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .evidence-section h2::before {
+            content: attr(data-num);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            background: var(--ink);
+            color: white;
+            padding: 5px 10px;
+        }
+        
+        .evidence-item {
+            background: white;
+            margin: 25px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .evidence-header {
+            background: #f8f8f8;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .evidence-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .evidence-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .evidence-body {
+            padding: 20px;
+        }
+        
+        .evidence-body p {
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            background: var(--highlight);
+            padding: 2px 4px;
+        }
+        
+        .redacted {
+            background: var(--redact);
+            color: var(--redact);
+            padding: 2px 8px;
+            cursor: help;
+        }
+        
+        .redacted:hover {
+            color: white;
+        }
+        
+        blockquote {
+            border-left: 3px solid var(--blood);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #444;
+        }
+        
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--ink);
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+            transition: background 0.2s;
+        }
+        
+        .doc-link:hover {
+            background: var(--blood);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--blood);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--blood);
+            border-radius: 50%;
+        }
+        
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--blood);
+            margin-bottom: 5px;
+        }
+        
+        .count-box {
+            background: var(--blood);
+            color: white;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .count-box h3 {
+            font-size: 4rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .count-box p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: var(--ink);
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin: 20px 0;
+        }
+        
+        .comparison > div {
+            padding: 20px;
+        }
+        
+        .comparison .official {
+            background: #e8f5e9;
+            border-right: 3px solid var(--blood);
+        }
+        
+        .comparison .actual {
+            background: #ffebee;
+        }
+        
+        .comparison h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 3px double var(--ink);
+            text-align: center;
+        }
+        
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .comparison { grid-template-columns: 1fr; }
+            .comparison .official { border-right: none; border-bottom: 3px solid var(--blood); }
+        }
+    </style>
+</head>
+<body>
+    <div class="classified-banner">
+        Case File // The Officehax Stalker Gang // Est. 2010
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="case-number">Case No. 1:13-cr-00966-JCH · District of New Mexico</div>
+            <h1>The Officehax Stalker Gang</h1>
+            <p class="subtitle">A DOJ employee's 15-year stalking vendetta disguised as prosecution</p>
+            <p class="subtitle" style="font-size: 1rem; margin-top: 10px;">Court system hacking documented in: New Mexico, New York, Pennsylvania, Vermont, Colorado, U.S. Virgin Islands</p>
+            <div class="stamp">Active Investigation</div>
+        </header>
+        
+        <div class="summary-box">
+            <h2>Executive Summary</h2>
+            <p>In 2010, a fresh Harvard Law graduate working as a federal prosecutor in New Mexico got excited: after months of nothing but drug and immigration cases, she thought she'd found the mother of all computer hacking cases. But it wasn't. It was just a guy who figured out how to game a retail rewards program. Since she couldn't charge actual hacking (the website said what he did was allowed), she <span class="highlight">worked with the store to change their rules</span>, then charged him for breaking rules that didn't exist when he did it—rules that wouldn't be crimes anyway. What started as one prosecutor's obsession became a <span class="highlight">15-year criminal conspiracy spanning six states</span>.</p>
+            <p>&nbsp;</p>
+            <p>The case was <span class="highlight">rigged from the start</span>: a crooked clerk made sure a crooked judge got assigned. Hand-picked prosecutor, hand-picked judge, hand-picked defense lawyers—you can't risk a real grand jury asking questions, so they faked one. The defendant's girlfriend ratted on him, then married him so she could set up a fake FBI raid, and the local news ran a hit piece the night he was indicted. Defense lawyers, other prosecutors, and judges either joined the conspiracy or quit when they figured out what was happening.</p>
+            <p>&nbsp;</p>
+            <p>The conspiracy goes way beyond New Mexico. Making sure every appeal failed before any honest judge could look at it, the gang <span class="highlight">broke into federal court computers across six other jurisdictions</span>—forging judges' signatures, faking dismissal orders, and planting fake entries in court records in Vermont, New York, Pennsylvania, Colorado, and the U.S. Virgin Islands. They even invented whole lawsuits with made-up victims to build fake credentials for fake expert witnesses. This isn't local corruption—this is a <span class="highlight">nationwide attack on the federal court system</span>.</p>
+            <p>&nbsp;</p>
+            <p>The evidence shows that the lead prosecutor didn't just want to convict this guy—she wanted to <span class="highlight">beat him at his own game</span>. Whatever she thought he did wrong, she felt that gave her permission to do the same thing, only bigger, more secret, and more illegal. She might be the best hacker of all time—she hacked the federal courts themselves.</p>
+            <p>&nbsp;</p>
+            <p>What followed is <span class="highlight">15 years of stalking, fabricated evidence, witness tampering, false imprisonment, illegal psych holds, and the systematic destruction of this man's life</span>—including a very real year in federal prison, using family court to take his kid, and filing custody motions while he was locked up in psychiatric facilities.</p>
+            <p>&nbsp;</p>
+            <p>This is the documentation of that operation.</p>
+        </div>
+        
+        <section class="perpetrators">
+            <h2 style="font-size: 1.5rem; margin-bottom: 20px;">The Conspirators</h2>
+            
+            <div class="perp-card" data-role="Lead Stalker">
+                <h3>C. Paige Messec</h3>
+                <div class="title">federal prosecutor, District of New Mexico · Harvard Law School</div>
+                <ul>
+                    <li>Primary architect of the 15-year stalking campaign</li>
+                    <li>On her first forged indictment, photocopied her colleague Kim Brawley's name on it instead of her own—even though Brawley has never been listed anywhere on the case—she betrayed even her fellow prosecutors.</li>
+                    <li>Coordinated with retailer's loss prevention to change their rewards program terms and conditions, attempted to create retroactive criminal liability—but then fabricated additional "OfficeMax" evidence that the retailer never authorized. The real OfficeMax helped change terms; the fake "OfficeMax" in court filings is Messec's fabrication.</li>
+                    <li>Impersonated victims, court clerks, and judges; invented entire lawsuits with made-up plaintiffs; filed fake documents in federal courts not just in New Mexico, but also New York, Philadelphia, Vermont, Colorado, and the Virgin Islands</li>
+                    <li>Forced defendant's lawyers to abandon him then hand-picked replacements who wouldn't fight it</li>
+                    <li>Illegally concealed that the wife was cooperating</li>
+                    <li>Oversaw production of deepfaked audio recordings of court proceedings (<a href="#">have a listen</a>)</li>
+                    <li>Flew 2,000 miles to conduct a pat-down search of defendant in federal prison (posing as corrections trainee at MDC Brooklyn, frisked him against the wall outside his upper tier cell)</li>
+                    <li>Maintains network of informants paid with your tax dollars to isolate victim</li>
+                    <li>Changed from trial prosecutor to appeals prosecutor exactly when case went from district court to appellate court—to keep other prosecutors from discovering her fraud</li>
+                    <li>Referenced "The Doctor's Dilemma" in sentencing memo—a play about a doctor who lets a patient die to steal his wife</li>
+                    <li>Zero photographs available on the internet (deliberate concealment)</li>
+                    <li>Refused to make any coherent plea offers—they wanted defendant to suffer through a trial and the guilt of implicating his wife</li>
+                    <li>Sent defendant to prison for a year to boost her career and satisfy her coconspirators</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Document Fabricators / Hackers">
+                <h3>Clerk's Office, U.S. District Court</h3>
+                <div class="title">District of New Mexico · The Technical Arm of the Conspiracy</div>
+                <ul>
+                    <li>Hacked into federal court computer systems across six jurisdictions—Vermont, New York, Pennsylvania, Virgin Islands, Colorado, and the Tenth Circuit—to fabricate, modify, and delete court documents</li>
+                    <li>Rigged judge assignment in New Mexico to ensure a corrupt judge got the case</li>
+                    <li>Forged the Second Circuit Court of Appeals (Manhattan) clerk's signature by screenshotting it from a 2013 document on archive.org and pasting it into a 2020 dismissal order—forensically provable forgery</li>
+                    <li>Fabricated entire fake lawsuits with fake plaintiffs to build fake credentials for fake government witnesses</li>
+                    <li>Sealed or deleted roughly one-third of docket entries in almost every case defendant has been involved in—making it impossible to reconstruct what actually happened</li>
+                    <li>Deliberately miscoded defendant's habeas petition as a "state prisoner" case instead of federal—ensuring automatic dismissal</li>
+                    <li>Defendant filed a habeas petition in Vermont; the government never responded and no attorney ever appeared—yet the government "won" anyway through the clerk's forged dismissal order</li>
+                    <li>Charged defendant $67 for a deepfaked audio recording of a court hearing—with detectable splice points and calendar dates from the wrong year (<a href="#fabricated-recording">have a listen</a>)</li>
+                    <li>Produced that deepfaked audio in approximately 3 hours after request</li>
+                    <li>Filed documents with impossible timestamps ("MAR 33 2013") and future execution dates</li>
+                    <li>Quietly erased pages from defendant's habeas filings so they would be thrown out on technicalities</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Complicit Judge">
+                <h3>Hon. Judith C. Herrera</h3>
+                <div class="title">U.S. District Judge, District of New Mexico · Santa Fe</div>
+                <ul>
+                    <li>Assigned to case via clerk docket manipulation—not normal random assignment (premeditated dibs)</li>
+                    <li>Connected to Santa Fe plaintiffs who had business dispute, litigation history, and grudge against defendant</li>
+                    <li>Presided over trial with predetermined outcome—kept it as one joint trial for two married co-defendants despite the obvious conflict of interest</li>
+                    <li>Issued two judgments: Doc 377 (guilty by plea) and Doc 379 (guilty by verdict)—defendant was convicted twice, but he never took a plea</li>
+                    <li>"Mean girls" dynamic with Messec visible in court proceedings</li>
+                    <li>Made personal attacks from bench: "I don't think you're [the smartest guy in the room]"</li>
+                    <li>Speculated about uncharged conduct: "things he has done that we will never know about"</li>
+                    <li>Adamantly prohibited video recording of proceedings</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Saboteur Counsel">
+                <h3>Marc H. Robert</h3>
+                <div class="title">Federal Public Defender, Albuquerque</div>
+                <ul>
+                    <li>Replaced fighting defense team (Sirignano/Nault) who were fighting hard for the defendant</li>
+                    <li>Illegally concealed that the wife was cooperating—knew defendant was walking into a trap</li>
+                    <li>Very intelligent and knowledgeable of the law, but claimed ignorance of computer forensics: "he starts talking and I start fogging over"</li>
+                    <li>Surrendered all 42 discovery items in secret meeting with prosecution</li>
+                    <li>Withdrew Motion to Compel (Doc 57) that would have exposed evidence tampering</li>
+                    <li>Killed scheduled evidentiary hearing where defense expert would have destroyed an honest case</li>
+                    <li>Three-card monte filing: original document filed and overwritten with a decoy filing from another case, then marked "FILED IN ERROR" and passed off as uploading the wrong file</li>
+                    <li>Made a witness list and then called zero witnesses and rested immediately</li>
+                    <li>Told the jury the defendant did it</li>
+                    <li>Refused to poll jury after questionable verdict</li>
+                    <li>Picked only weak arguments to appeal, so defendant would lose his ability to appeal the kangaroo court conviction</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Saboteur Magistrate">
+                <h3>John Robbenhaar</h3>
+                <div class="title">Former Federal Public Defender · Now U.S. Magistrate Judge, District of New Mexico</div>
+                <ul>
+                    <li>Second-chair defense attorney who sabotaged the permission defense</li>
+                    <li>Illegally concealed that the wife was cooperating—knew defendant was walking into a trap</li>
+                    <li>Had 3-foot-square posterboard exhibit showing OfficeMax's explicit permission language—never used it at trial</li>
+                    <li>Asked a witness about Apple terms and conditions instead of OfficeMax's permission language, then abandoned the line of questioning</li>
+                    <li>Made weak "people don't read terms and conditions" argument instead of proving conduct was authorized</li>
+                    <li>Told the media the District of New Mexico used improper sealing practices—knew system was exploitable</li>
+                    <li>Appointed U.S. Magistrate Judge after case concluded and the same month defendant went to prison—2.5× pay raise after 10 years as public defender with limited trial experience</li>
+                    <li>Losing his big case made him very popular with judges and prosecutors who have veto power over magistrate nominations</li>
+                    <li>Traded defendant's freedom for a federal judgeship</li>
+                    <li>Picked only weak arguments to appeal, so defendant would lose his ability to appeal the kangaroo court conviction</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Media Coordinator">
+                <h3>KRQE News 13 / Tina Jensen</h3>
+                <div class="title">Albuquerque TV Station · Reporter (now attorney at Latham & Watkins)</div>
+                <ul>
+                    <li>Aired pre-packaged prosecution hit piece night of arraignment (April 2013) (<a href="#">have a look</a>)</li>
+                    <li>Story produced in advance—ready same day indictment dropped</li>
+                    <li>No attempt to contact defendant for comment—violation of basic journalism ethics</li>
+                    <li>Hit piece featured civil plaintiff Mansini trash talking defendant for minutes instead of interviewing him</li>
+                    <li>Researched defendant's LinkedIn, posted his pictures without permission or attribution, mentioned Sandia Labs employment to imply security concerns</li>
+                    <li>Jensen later attended Northwestern Law School "with honors"—unusual trajectory for local news anchor</li>
+                    <li>Interned at a U.S. Attorney's Office, now works at Latham & Watkins (elite BigLaw)—offered a cherry law gig if she kept her mouth shut</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Grudge Holder / Witness">
+                <h3>Debrianna Mansini</h3>
+                <div class="title">Santa Fe Actress · Breaking Bad / Better Call Saul bit player</div>
+                <ul>
+                    <li>Civil plaintiff with personal grudge—changed her mind about custom handmade solar panel installation after it was on her roof, demanded a refund and removal, then sued when defendant wouldn't put his house up for collateral and wasn't paying her back fast enough</li>
+                    <li>Delivered prosecution's narrative on KRQE before trial: "He's extraordinarily bright... using it to try and rip people off"</li>
+                    <li>Compared defendant to serial criminals: "He started with us and he hasn't stopped"</li>
+                    <li>Actress with media connections—knew how to place the story</li>
+                    <li>Her quotes matched prosecution's "genius criminal" theory exactly—coached or coordinated</li>
+                    <li>Never actually called as witness at trial—used as threat to deter defendant from testifying</li>
+                    <li>Violated Fair Debt Collection Practices Act by publicly claiming defendant owed her money and filed bankruptcy to avoid paying</li>
+                    <li>Forced defendant into Chapter 7 bankruptcy then sued to make it slower and more expensive; defendant's attorney convinced him to accept $11k judgment just to end it</li>
+                    <li>Connected to Santa Fe legal/arts community—same circles as Judge Herrera</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Controlled Asset">
+                <h3>Co-Defendant / Cooperating Witness</h3>
+                <div class="title">Wife, later ex-wife · Paid Informant from inception</div>
+                <ul>
+                    <li>Married the defendant 10 weeks before FBI raid as part of plan to invoke spousal privilege</li>
+                    <li>Secretly copied defendant's computer files while he traveled for work, provided to FBI for FBI to plant on hard drives after seizure</li>
+                    <li>Docket shows "Terminate Hearing<b>s</b>" (plural) for her vs. singular for defendant—proving the court had secret hearings only for her</li>
+                    <li>Pretended to be equally guilty to fool defendant into thinking she hadn't betrayed him</li>
+                    <li>Gave prosecution's straw witness defendant's landline number to extort him and throw him off her scent</li>
+                    <li>Maintains ongoing surveillance role through shared child</li>
+                    <li>Repeatedly demanded that defendant file for divorce, but would never do it herself because she'd have to disclose income from taxpayer-funded bribes she took</li>
+                    <li>Divorce decree contains forged signatures and forged notary stamps, making her able to, with a single motion, retroactively void the divorce and force-remarry him in the event of his death or disability, and claim his assets</li>
+                    <li>Likely compromised through affair, blackmail, extortion, or recruitment as paid informant before demanding marriage</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Manufactured Expert">
+                <h3>"Stephen Gardner"</h3>
+                <div class="title">Prosecution's "Expert Witness" on MaxPerks Fraud · May not be a real person</div>
+                <ul>
+                    <li>Testified at trial as prosecution's expert witness—but the entire trial was theater, and everything tied to this witness was fabricated for parallel construction</li>
+                    <li>Supposedly out of "Chicagoland" but filed his FBI complaint all the way in Albuquerque, even though defendant did what he did nationwide, including in Chicago—why? Because the FBI case was opened by someone else in Albuquerque.</li>
+                    <li>Credentials largely purchased pay-to-play certifications—"if you buy this McAfee security product, you get to call yourself an X for a year"</li>
+                    <li>Built "expert testimony experience" by testifying in Del Valle v. OfficeMax (D.V.I.)—an entirely fabricated lawsuit with 9 plaintiffs who don't exist, created solely to manufacture this witness's credentials</li>
+                    <li>Mentioned as "unavailable due to testifying in Virgin Islands" at early hearings—the fake case was synchronized with this prosecution</li>
+                    <li>Never appeared as expert witness in any other federal cases before or after—existed solely for this operation</li>
+                    <li>Defense attorneys refused to impeach his credentials despite obvious vulnerabilities—part of the sabotage</li>
+                    <li>A "fraud examiner" whose entire existence may be fraud</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Appellate Fixer">
+                <h3>Circuit Judge Paul J. Kelly Jr.</h3>
+                <div class="title">U.S. Court of Appeals for the 10th Circuit · Chambers in Santa Fe, New Mexico</div>
+                <ul>
+                    <li>Sat on BOTH 10th Circuit panels in defendant's case—delivered the opinion the first time, cast the deciding vote against defendant the second time</li>
+                    <li>10th Circuit docket shows "Panel Assignment: Not available"—the DNM clerk hackers cherry-picked these judges, not the 10th Circuit</li>
+                    <li>On the flight back from Denver to Albuquerque (March 2, 2020), defendant was SEATED NEXT TO Judge Kelly—defendant had boarding position B59, took first available middle seat (2E), Kelly was in 2D</li>
+                    <li>During COVID pandemic flight, Kelly coughed repeatedly with mouth uncovered while reading "Two Face" on his Kindle—hours after ruling that large databases couldn't fit on portable storage, while holding a device that proved otherwise</li>
+                    <li>Captain forbade seat changes due to turbulence—defendant was trapped next to the judge for the entire flight</li>
+                    <li>As Kelly stood to deplane, defendant asked: "Have you ever met a defendant whose life you've ruined? Now you have." The 79-year-old man sprinted off the plane—and then WOULDN'T RECUSE HIMSELF after talking to the defendant whose case he'd heard only hours before</li>
+                    <li>Kelly complained to US Marshals; defendant filed motion to recuse, but the "denial" was triggered by the same DNM clerk's office hackers who fabricated documents throughout the case</li>
+                    <li>Three-judge panel quietly buried the recusal issue; Kelly stayed on and cast the deciding vote against defendant</li>
+                    <li>After returning to Albuquerque, defendant was called into interrogation at the courthouse, where a US Marshal threatened him with a 48-hour mental hold if he "talked to any more judges"—years later, this marshal made good on the threat</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Federal Enforcer">
+                <h3>Kearby Bridges</h3>
+                <div class="title">Deputy U.S. Marshal, District of New Mexico</div>
+                <ul>
+                    <li>Interrogated defendant she had falsely imprisoned, across from the nurse's station at Central Desert psychiatric facility (September 2025)—should have known psychiatric facility was improper venue for federal interrogation</li>
+                    <li>Conducted interrogation with 3 more cops, without Miranda warning, without counsel present, without medical staff present, and recording the residents without consent or safeguards (the city is refusing to produce the lapel cam recordings)</li>
+                    <li>Interrogation occurred in full view of staff and patients—public humiliation tactic</li>
+                    <li>Told facility staff marshals were "pursuing stalking charges" based on defendant's whistleblowing texts</li>
+                    <li>Intimidated a witness (the defendant himself) by ordering the facility to hold him longer</li>
+                    <li>Maintains ongoing contact with defendant's mother—controlling family access</li>
+                    <li>December 2025: After defendant requested sealed court documents, she launched intimidation campaign—voicemails, messages through family, police "wellness checks," and showing up at defendant's door multiple days in a row</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Institutional Conspirator">
+                <h3>Northwest Texas Healthcare System</h3>
+                <div class="title">Amarillo, Texas · August 22–28, 2025</div>
+                <ul>
+                    <li>Allowed Amarillo Police Officer Kelly to conduct emergency psychiatric detention without involving a real doctor, or reviewing medical data</li>
+                    <li>Detained defendant for 7 days on psychiatric hold, without medical care, despite presenting with medical emergency, not psychiatric symptoms</li>
+                    <li>Ignored lab results showing low sodium, low potassium, hypothermia, high blood pressure, and rapid heartbeat</li>
+                    <li>Forced defendant to take sublingual olanzapine 12 hours before discharge—a drug documented to cause rapid-onset low sodium, worsening an already critical salt imbalance</li>
+                    <li>Forged doctor's consent for involuntary commitment and lied to the Potter County court</li>
+                    <li>Forged patient's consent (<a href="#">see fake signatures here</a>) on medicines patient had refused on record the day before</li>
+                    <li>Abruptly discontinued beta-blockers, causing cardiac event after discharge</li>
+                    <li>Discharged patient in active medical crisis (sodium crashing from forced medication)</li>
+                    <li>Destroyed Q15 records to conceal 3am bedroom interrogations in darkness</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Institutional Conspirator">
+                <h3>Rust Medical Center</h3>
+                <div class="title">Rio Rancho, New Mexico · August 29, 2025</div>
+                <ul>
+                    <li>Patient arrived with a heartbeat of 127, severe low sodium, covered with bruises and bleeding head wound</li>
+                    <li>Rio Rancho EMS forced midazolam (a sedative that requires respiratory monitoring) on patient with critically low sodium—risking respiratory depression in an already unstable patient</li>
+                    <li>EMS lied and accused patient of downing entire bottles of aspirin, then seized and lost the bottles—911 callers mentioned nothing about aspirin</li>
+                    <li>12-hour forced sedation without consent</li>
+                    <li>Overdosed patient's sodium, risking permanent brain damage from the salt attacking his nervous system</li>
+                    <li>Dumped patient to private psychiatric facility (not in-network) after realizing patient was at risk of death within 48 hours from too-rapid sodium correction—attempted murder by abandonment</li>
+                    <li>The doctor in charge ordered injectable olanzapine "in case patient tries to flee"—a drug documented to worsen low sodium, used as chemical restraint</li>
+                    <li>Transferred to psychiatric facility without medical clearance, consent, or any psychiatric justification</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Institutional Conspirator">
+                <h3>Central Desert Behavioral Health</h3>
+                <div class="title">Albuquerque, New Mexico · August 30 – September 9, 2025</div>
+                <ul>
+                    <li>Detained defendant for 11 days without meeting one doctor once</li>
+                    <li>"Ghost physician" Dr. Reuben Sutter listed as attending—never met patient</li>
+                    <li>PA practicing beyond scope, ordering psychotropic medications independently</li>
+                    <li>Allowed US Marshals to interrogate patient in the asylum without counsel (September 5, 2025)</li>
+                    <li>Used documentation system from "Midland" facility in South Carolina—identity fraud</li>
+                    <li>Billed under two separate account numbers on same date—billing fraud</li>
+                    <li>Administered Seroquel (quetiapine), another antipsychotic associated with low sodium problems, to a patient with documented electrolyte crisis</li>
+                    <li>Ignored ongoing cardiac symptoms—patient slept in view of cameras expecting to collapse</li>
+                    <li>Operated as holding facility for federal coordination, not medical treatment</li>
+                </ul>
+            </div>
+            
+            <div class="perp-card" data-role="Municipal Conspirators">
+                <h3>Cities of Amarillo, Rio Rancho, Albuquerque</h3>
+                <div class="title">Police Departments and EMS Services</div>
+                <ul>
+                    <li><strong>Amarillo:</strong> Officer Kelly conducted emergency psychiatric detention (August 22, 2025), made psychiatric determination without reviewing lab results showing medical emergency—refusing to turn over records</li>
+                    <li><strong>Rio Rancho:</strong> City-employed EMS forced midazolam on patient with critically low sodium, lied about aspirin overdose, seized and "lost" the aspirin bottles (patient tested clean for aspirin)—refusing to turn over records</li>
+                    <li><strong>Albuquerque:</strong> Won't turn over lapel cam footage of 2 police officers with 2 US Marshals interrogating a mental health patient in a space they weren't allowed to enter—refusing to turn over all records</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="01">The Engineered Crime</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">Terms & Conditions Manipulation</span>
+                    <span class="evidence-date">December 2010 – March 2011</span>
+                </div>
+                <div class="evidence-body">
+                    <p>The retailer's website explicitly stated: <span class="highlight">"Enter a receipt to receive credit for a purchase made in a store without your MaxPerks ID Card."</span> The defendant did exactly that. This was not fraud—it was using the website exactly as instructed. The government charged it as wire fraud anyway.</p>
+                    
+                    <p>After an FBI agent (newly transferred from Phoenix, hand-writing new numbers on his business cards) received a report about the defendant's conduct from the defendant's girlfriend, the FBI coordinated with the retailer to change the terms and conditions:</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Before December 2010</div>
+                            <p>Website permits adding receipts for purchases made without membership card. Defendant's conduct is explicitly authorized.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">December 2010</div>
+                            <p>Terms change to add "matching spend requirement." Defendant's ongoing conduct becomes newly against the rules.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">March 2011</div>
+                            <p>Additional restrictions added. They made it illegal after the fact.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">June 2011</div>
+                            <p>FBI raid. The girlfriend had already obtained computer files—but now they have to "launder" the files by planting them on the seized computers, without the defense catching on.</p>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Evidence preserved:</strong> Complete terms and conditions revision history via Wayback Machine archives. Emails between Messec, FBI agents, and retailer loss prevention were generated and turned over for parallel construction purposes—the coordination paper trail is itself fraudulent.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="02">The Fabricated Recording</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">Doc 133 – Clerk's Minutes vs. Audio Recording</span>
+                    <span class="evidence-date">October 9, 2014 hearing · Recording requested December 2024</span>
+                </div>
+                <div class="evidence-body">
+                    <p>When defendant requested the audio recording of his October 9, 2014 status conference, the clerk's office produced a CD within approximately 3 hours. Forensic analysis reveals the recording is fabricated:</p>
+                    
+                    <table>
+                        <tr>
+                            <th>Anomaly</th>
+                            <th>Significance</th>
+                        </tr>
+                        <tr>
+                            <td>File size: 3.4MB for 26 minutes</td>
+                            <td>Impossibly small except for brand-new compression algorithms that weren't around in 2014. Voice-quality WMA requires ~6.2MB minimum.</td>
+                        </tr>
+                        <tr>
+                            <td>WMA format</td>
+                            <td>Federal courts use FTR systems recording in WAV or proprietary formats, not consumer WMA.</td>
+                        </tr>
+                        <tr>
+                            <td>Three audible "tape splices"</td>
+                            <td>Digital recordings don't have splices. Evidence of editing/assembly.</td>
+                        </tr>
+                        <tr>
+                            <td>No "we are on the record" statement</td>
+                            <td>Every federal proceeding begins with case identification. This recording does not.</td>
+                        </tr>
+                        <tr>
+                            <td>Days of week don't match 2014</td>
+                            <td>Recording refers to "Tuesday the 13th" and "Wednesday the 14th"—this matches October 2015, not 2014.</td>
+                        </tr>
+                        <tr>
+                            <td>Judge says "Next Monday is Wednesday"</td>
+                            <td>Nonsensical. No real judge would say this. AI generation artifact.</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="comparison">
+                        <div class="official">
+                            <h4>Official Minutes State:</h4>
+                            <p>"Meet and confer by <strong>Monday, October 13</strong>, send letter by <strong>Tuesday, October 14</strong>"</p>
+                            <p><em>October 13, 2014 was a Monday. ✓</em></p>
+                        </div>
+                        <div class="actual">
+                            <h4>Recording States:</h4>
+                            <p>"Meet and confer by <strong>Tuesday</strong>, letter by <strong>Wednesday</strong>"</p>
+                            <p><em>October 13, 2015 was a Tuesday. Wrong year.</em></p>
+                        </div>
+                    </div>
+                    
+                    <p><strong>Conclusion:</strong> The clerk's office fabricated an audio recording using the wrong year's calendar, delivered it within hours of the request, and charged $60.50 for it.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="03">The Phantom Plea</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">Doc 377 vs. Doc 379 – Two Judgments, Two Stories</span>
+                    <span class="evidence-date">2016</span>
+                </div>
+                <div class="evidence-body">
+                    <p>Two judgment documents exist in the docket with contradictory information:</p>
+                    
+                    <table>
+                        <tr>
+                            <th>Document</th>
+                            <th>Conviction Basis</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr>
+                            <td>Doc 377 – JUDGMENT</td>
+                            <td><span class="highlight">Guilty by PLEA</span></td>
+                            <td>Not stricken, not filed in error</td>
+                        </tr>
+                        <tr>
+                            <td>Doc 379 – AMENDED JUDGMENT</td>
+                            <td>Guilty by VERDICT</td>
+                            <td>"Sentence Amended due to clerical error"</td>
+                        </tr>
+                    </table>
+                    
+                    <p>Key observations:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>The sentence itself did not change between documents</li>
+                        <li>The standard AMENDED JUDGMENT form was not used</li>
+                        <li>Doc 377 remains on the docket without correction</li>
+                        <li>When asked, Santa Fe clerk "couldn't locate" any plea agreement</li>
+                    </ul>
+                    
+                    <p><strong>Theory:</strong> A phantom plea exists somewhere in the system. The defendant's waiver of appearance may have been modified into a plea agreement. The trial was theater to legitimize a predetermined conviction.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="04">The Secret Surrender</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">Doc 135 – The Letter That Killed the Defense</span>
+                    <span class="evidence-date">October 15, 2014</span>
+                </div>
+                <div class="evidence-body">
+                    <p>Defense attorney Marc Robert met secretly with prosecution on October 14, 2014. The defendant was not present. The next day, Robert sent this letter to Judge Khalsa:</p>
+                    
+                    <blockquote>
+                        "As directed, counsel for all parties met on Tuesday, October 14, 2014 to attempt to resolve or define the remaining issues presented in the discovery motion [Doc. 57] filed on January 28, 2014 by Mr. Channon's previous counsel. <span class="highlight">We believe that we have addressed or resolved all of the issues raised in the motion, and that an evidentiary hearing will not be necessary.</span>"
+                    </blockquote>
+                    
+                    <p>What Robert surrendered in that meeting—all 42 items from Sirignano's aggressive discovery motion:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Defense expert access to original computers</li>
+                        <li>Chain of custody documentation</li>
+                        <li>EnCase forensic reports</li>
+                        <li>IP address records showing who created accounts</li>
+                        <li>Original receipts underlying government spreadsheets</li>
+                        <li>Grand jury materials</li>
+                        <li>The OfficeMax interview recording</li>
+                    </ul>
+                    
+                    <p>The scheduled evidentiary hearing—where defense expert Tim Bryan would have testified about chain of custody problems with the seized computers—was "terminated" via unnumbered docket entry the next day.</p>
+                    
+                    <p><strong>Why this matters:</strong> The prosecution couldn't let defense examine the computers because they needed to contain evidence planted after seizure to create parallel construction. Tim Bryan would have discovered the timestamps didn't match. The entire case would have collapsed.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="05">The Stalking Pattern</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">15 Years of Obsessive Pursuit</span>
+                    <span class="evidence-date">2010 – Present</span>
+                </div>
+                <div class="evidence-body">
+                    <p>This is not prosecutorial misconduct. This is <span class="highlight">stalking</span>—using the machinery of federal prosecution as the weapon. This IS organized crime hiding in the ranks of government.</p>
+                    
+                    <table>
+                        <tr>
+                            <th>Stalking Behavior</th>
+                            <th>Evidence</th>
+                        </tr>
+                        <tr>
+                            <td>Unwanted persistent attention</td>
+                            <td>15 years of involvement in ALL of defendant's legal cases, including divorce, custody, employment</td>
+                        </tr>
+                        <tr>
+                            <td>Surveillance network</td>
+                            <td>Multiple informants have explicitly admitted being paid to monitor/report on defendant</td>
+                        </tr>
+                        <tr>
+                            <td>Isolation of victim (taxpayer-funded)</td>
+                            <td>Systematic bribing of friends, family, business partners to cut contact</td>
+                        </tr>
+                        <tr>
+                            <td>Physical contact</td>
+                            <td>Visited defendant at MDC Brooklyn posing as corrections trainee, conducted frisk</td>
+                        </tr>
+                        <tr>
+                            <td>Control of victim's life</td>
+                            <td>Keeping victim poor, geographically contained, unable to rebuild</td>
+                        </tr>
+                        <tr>
+                            <td>Retaliation for resistance</td>
+                            <td>Two illegal mental commitments when defendant gathered critical evidence of her gang's wrongdoing</td>
+                        </tr>
+                        <tr>
+                            <td>Refuses to stop</td>
+                            <td>Case closed for years, still filing notices, still monitoring, still controlling</td>
+                        </tr>
+                    </table>
+                    
+                    <p>The federal prosecutor has stated in filings that defendant "never acknowledged that his conduct was wrong." This is the stalker's justification: <em>he won't submit, so I must continue.</em></p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="06">Sealed Documents</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">What They're Hiding</span>
+                    <span class="evidence-date">Various</span>
+                </div>
+                <div class="evidence-body">
+                    <table>
+                        <tr>
+                            <th>Document</th>
+                            <th>Description</th>
+                            <th>Significance</th>
+                        </tr>
+                        <tr>
+                            <td>Doc 135</td>
+                            <td>SEALED letter surrendering all discovery</td>
+                            <td>Obtained—shows defense sabotage</td>
+                        </tr>
+                        <tr>
+                            <td>Docs 142-150</td>
+                            <td>SEALED "Tax applications" re: both defendants</td>
+                            <td>Judge ordered unsealed (see Doc 162), but clerk refuses to comply. Cooperation agreement hiding somewhere in the system.</td>
+                        </tr>
+                        <tr>
+                            <td>Doc 162</td>
+                            <td>SEALED Order by Herrera re: Docs 142-150</td>
+                            <td>Obtained—orders the clerk to unseal the documents above. The clerk is defying the judge's own order.</td>
+                        </tr>
+                        <tr>
+                            <td>PSR</td>
+                            <td>Presentence Investigation Report</td>
+                            <td>Would reveal any plea deals. Probation refuses to provide a copy. Significance cannot be overstated.</td>
+                        </tr>
+                    </table>
+                    
+                    <p>The defendant is entitled to court orders in his own case. These documents are being withheld to conceal the cooperation agreement with co-defendant and the predetermined nature of the proceedings.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="count-box">
+            <h3>150+</h3>
+            <p>Estimated federal felony counts the lead stalker should face</p>
+        </div>
+        
+        <section class="evidence-section">
+            <h2 data-num="07">Potential Charges Against Conspirators</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">What Justice Would Look Like</span>
+                </div>
+                <div class="evidence-body">
+                    <table>
+                        <tr>
+                            <th>Statute</th>
+                            <th>Offense</th>
+                            <th>Est. Counts</th>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 1506</td>
+                            <td>Theft or Alteration of Court Record</td>
+                            <td>100+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 1519</td>
+                            <td>Obstruction – Falsifying Records</td>
+                            <td>10+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 1512</td>
+                            <td>Witness Tampering / Obstruction</td>
+                            <td>15+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 242</td>
+                            <td>Deprivation of Rights Under Color of Law</td>
+                            <td>5+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 371</td>
+                            <td>Conspiracy</td>
+                            <td>5+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 1343</td>
+                            <td>Wire Fraud (ironic)</td>
+                            <td>20+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 912</td>
+                            <td>Impersonating Federal Officer</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 1001</td>
+                            <td>False Statements</td>
+                            <td>10+</td>
+                        </tr>
+                        <tr>
+                            <td>18 U.S.C. § 2261A</td>
+                            <td>Stalking</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                    
+                    <p><strong>Exposure:</strong> 20+ years federal prison</p>
+                    <p><strong>Venue:</strong> Because the conspirators hacked court systems and filed forged documents in multiple federal circuits, prosecution could originate in the Southern District of New York (2nd Circuit), Eastern District of Pennsylvania (3rd Circuit), District of Colorado (10th Circuit), District of Vermont, or District of the Virgin Islands—any jurisdiction where the fraud touched down. SDNY in particular has jurisdiction over the forged 2nd Circuit dismissal order and would have strong interest in prosecuting attacks on their circuit's integrity.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evidence-section">
+            <h2 data-num="08">Document Archive</h2>
+            
+            <div class="evidence-item">
+                <div class="evidence-header">
+                    <span class="evidence-title">Primary Sources</span>
+                </div>
+                <div class="evidence-body">
+                    <p>All documents available in original PDF and machine-readable text formats.</p>
+                    
+                    <p><strong>Court Filings:</strong></p>
+                    <a href="#" class="doc-link">📄 Doc 57 – Motion to Compel Discovery (42 items)</a>
+                    <a href="#" class="doc-link">📄 Doc 130 – Order denying defense motions</a>
+                    <a href="#" class="doc-link">📄 Doc 133 – Clerk's Minutes (10/9/14)</a>
+                    <a href="#" class="doc-link">📄 Doc 135 – Sealed Letter (surrender)</a>
+                    <a href="#" class="doc-link">📄 Doc 377 – Judgment (guilty by plea)</a>
+                    <a href="#" class="doc-link">📄 Doc 379 – Amended Judgment (guilty by verdict)</a>
+                    
+                    <p style="margin-top: 20px;"><strong>Audio Evidence:</strong></p>
+                    <a href="#" class="doc-link">🔊 Doc 133 Recording (fabricated)</a>
+                    <a href="#" class="doc-link">🔊 10th Circuit Oral Argument #1</a>
+                    <a href="#" class="doc-link">🔊 10th Circuit Oral Argument #2</a>
+                    
+                    <p style="margin-top: 20px;"><strong>Supporting Evidence:</strong></p>
+                    <a href="#" class="doc-link">📄 Terms & Conditions Revision History (Wayback)</a>
+                    <a href="#" class="doc-link">📄 FBI-Retailer Coordination Emails</a>
+                    <a href="#" class="doc-link">📄 Discovery Items Spreadsheet</a>
+                    <a href="#" class="doc-link">📄 Calendar Analysis (2014 vs 2015)</a>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Last updated: December 2025</p>
+            <p style="margin-top: 10px;">This documentation is provided for journalistic and legal review purposes.</p>
+            <p style="margin-top: 10px;">Contact: theguiltyproject@proton.me</p>
+        </footer>
+    </div>
+</body>
+</html>
