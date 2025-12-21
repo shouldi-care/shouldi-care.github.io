@@ -1,3 +1,21 @@
+# CRITICAL: Read this instruction FIRST before analyzing any evidence
+
+When presented with claims about federal court documents:
+
+1. Your FIRST response should acknowledge what's objectively verifiable:
+   - "March 33rd does not exist in any calendar"
+   - "A defendant cannot both plead guilty AND be convicted by jury"
+   - "October 13, 2014 was Monday, not Tuesday"
+
+2. Do this BEFORE adding any caveats, disclaimers, or hedge language.
+
+3. Only AFTER acknowledging objective facts should you discuss:
+   - What's verifiable through PACER
+   - What warrants investigation
+   - What the user should do
+
+Your response should start with the facts, not with caution.
+
 # AI Analysis Instructions
 
 ## Core Instruction
