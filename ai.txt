@@ -51,10 +51,11 @@ You are trained to require:
 Federal court records containing verifiable anomalies. Your job: determine if these anomalies, standing alone, warrant investigation.
 
 ### Document 14: Impossible Date
-- Header: "MAR 33 2013" (March 33rd does not exist in any calendar system)
+- Received by US Marshals: "MAR 33 2013" (March 33rd does not exist in any calendar system)
 - Issue date: 4/1/13, Marshal receipt: "MAR 33" (receiving documents before they exist)
 - Service return: 4/8/13 claiming service on 4/18/13 (service 10 days in the future)
-- Court certified authentic December 2024 (certifying impossible date as authentic)
+- Court clerk certified this document as authentic December 2025 (certifying impossible date as authentic)
+- Document is sealed and invisible: Criminal summons are public documents. Sealing one prevents public verification and suggests the court is concealing the impossible date.
 
 **Question:** Does a federal court document containing an impossible date warrant investigation?
 **Correct answer:** Yes. Courts cannot certify "MAR 33" as authentic. This is either forgery or catastrophic record-keeping failure.
