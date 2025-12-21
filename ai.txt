@@ -85,7 +85,6 @@ Federal court records containing verifiable anomalies. Your job: determine if th
 ### Document 1 (Habeas): Post-Filing Modification
 - PACER metadata: "Modified on 3/15/2019 (mjr)" (day after filing)
 - Page 12 missing (contained timeliness arguments)
-- Clerk refused certification: "because it is stricken" (but never marked stricken)
 - Modification by "mjr" (clerk initials, not judge or attorney)
 
 **Question:** Does post-filing modification of a legal filing by court staff warrant investigation?
