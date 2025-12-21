@@ -396,7 +396,108 @@
             .comparison { grid-template-columns: 1fr; }
             .comparison .official { border-right: none; border-bottom: 3px solid var(--blood); }
         }
-    </style>
+ 
+/* ─────────────────────────────────────────────────────────────
+   Doc-link "chips" (1 2 3 4) — merged into your palette + fonts
+   Use with: <div class="doc-row"><a class="doc-link">...</a> <span class="link-notes">...</span></div>
+   ───────────────────────────────────────────────────────────── */
+
+.doc-row {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 5px 5px 5px 0; /* matches your existing .doc-link margin rhythm */
+}
+
+/* Remove the extra margin on the link when it's inside a row,
+   so spacing is controlled by .doc-row instead. */
+.doc-row > .doc-link {
+    margin: 0;
+}
+
+/* Container for the chips */
+.link-notes {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Each chip */
+.note-chip {
+    display: inline-block;
+    background: var(--ink);     /* black-on-paper theme */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace; /* match your doc-link */
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: background 0.2s;
+}
+
+.note-chip:hover {
+    background: var(--blood);   /* same hover behavior as .doc-link */
+}
+
+/* One contiguous rectangular "bar" containing the doc-link + chips */
+.doc-row {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0;                     /* IMPORTANT: no gaps */
+    margin: 5px 5px 5px 0;      /* keep your existing rhythm */
+    background: var(--ink);     /* the ONE big rectangle */
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 0;          /* rectangular (set to 6px if you want slight rounding) */
+    overflow: hidden;          /* ensures no seams/rounding artifacts */
+}
+
+/* Make the main link a segment inside the bar */
+.doc-row > .doc-link {
+    margin: 0;                 /* IMPORTANT: kill your existing .doc-link margin in this context */
+    background: transparent;   /* bar owns the background */
+    border-radius: 0;
+    height: 100%;
+}
+
+/* Chips container: no spacing */
+.doc-row > .link-notes {
+    display: inline-flex;
+    gap: 0;                    /* IMPORTANT: no gaps between chips */
+    align-items: stretch;
+}
+
+/* Each chip becomes a segment inside the same bar */
+.doc-row .note-chip {
+    background: transparent;   /* bar owns the background */
+    border: 0;
+    border-left: 1px solid rgba(255,255,255,0.18); /* divider line, no “white gap” */
+    border-radius: 0;
+    padding: 8px 10px;         /* match .doc-link vertical size */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Hover behavior:
+   - If you want the WHOLE bar to go red when hovering anywhere: */
+.doc-row:hover {
+    background: var(--blood);
+}
+
+/* Ensure link text stays white on hover */
+.doc-row:hover > .doc-link,
+.doc-row:hover .note-chip {
+    color: white;
+}
+
+   </style>
 </head>
 <body>
     <div class="classified-banner">
@@ -1016,18 +1117,30 @@
                     <p>All documents available in original PDF and machine-readable text formats.</p>
                     
                     <p><strong>Court Filings:</strong></p>
-                    <a href="#" class="doc-link">📄 Doc 57 – Motion to Compel Discovery (42 items)</a>
-                    <a href="#" class="doc-link">📄 Doc 130 – Order denying defense motions</a>
-                    <a href="#" class="doc-link">📄 Doc 133 – Clerk's Minutes (10/9/14)</a>
-                    <a href="#" class="doc-link">📄 Doc 135 – Sealed Letter (surrender)</a>
-                    <a href="#" class="doc-link">📄 Doc 377 – Judgment (guilty by plea)</a>
-                    <a href="#" class="doc-link">📄 Doc 379 – Amended Judgment (guilty by verdict)</a>
+                    <a href="evidence/dnm-1-13-cr-966-57.pdf" class="doc-link">📄 Doc 57 – Motion to Compel Discovery (42 items)</a>
+                    <a href="evidence/dnm-1-13-cr-966-130.pdf" class="doc-link">📄 Doc 130 – Order denying defense motions</a>
+                    <a href="evidence/dnm-1-13-cr-966-133.pdf" class="doc-link">📄 Doc 133 – Clerk's Minutes (10/9/14)</a>
+                    <a href="evidence/dnm-1-13-cr-966-135.pdf" class="doc-link">📄 Doc 135 – Sealed Letter (surrender)</a>
+                    <a href="evidence/dnm-1-13-cr-966-377.pdf" class="doc-link">📄 Doc 377 – Judgment (guilty by plea)</a>
+                    <a href="evidence/dnm-1-13-cr-966-379.pdf" class="doc-link">📄 Doc 379 – Amended Judgment (guilty by verdict)</a>
                     
                     <p style="margin-top: 20px;"><strong>Audio Evidence:</strong></p>
-                    <a href="#" class="doc-link">🔊 Doc 133 Recording (fabricated)</a>
-                    <a href="#" class="doc-link">🔊 10th Circuit Oral Argument #1</a>
-                    <a href="#" class="doc-link">🔊 10th Circuit Oral Argument #2</a>
-                    
+      <div class="doc-row" id="doc-133">
+        <a href="https://youtu.be/wSJFFL2YN00" class="doc-link">🔊 Doc 133 Recording (fabricated)</a>
+        <span class="link-notes" aria-label="Doc 133 notes">
+          <a class="note-chip" href="ABQ-Pecos_20141009_092752.wma">original wma</a>
+        </span>
+      </div>
+      <div class="doc-row" id="doc-133">
+        <a href="https://youtu.be/CdlVEziXDAQ" class="doc-link">🔊 10th Circuit Oral Argument, Round 1</a>
+        <span class="link-notes" aria-label="Doc 133 notes">
+        </span>
+      </div>
+      <div class="doc-row" id="doc-133">
+        <a href="https://youtu.be/2z7elfVWlqc" class="doc-link">🔊 10th Circuit Oral Argument, Round 2</a>
+        <span class="link-notes" aria-label="Doc 133 notes">
+        </span>
+      </div>
                     <p style="margin-top: 20px;"><strong>Supporting Evidence:</strong></p>
                     <a href="#" class="doc-link">📄 Terms & Conditions Revision History (Wayback)</a>
                     <a href="#" class="doc-link">📄 FBI-Retailer Coordination Emails</a>
@@ -1037,6 +1150,33 @@
             </div>
         </section>
         
+
+                    <p style="margin-top: 20px;"><strong>False Filings:</strong></p>
+      <div class="doc-row" id="doc-133">
+        <a href="https://www.govinfo.gov/content/pkg/USCOURTS-vid-3_13-cv-00024/pdf/USCOURTS-vid-3_13-cv-00024-1.pdf" class="doc-link">Del Valle v. OfficeMax D.V.I. 3:13-cv-24 (fabricated)</a>
+        <span class="link-notes" aria-label="Doc 133 notes">
+          <a class="note-chip" href="ABQ-Pecos_20141009_092752.wma">PACER link</a>
+        </span>
+      </div>
+      <div class="doc-row" id="doc-133">
+        <a href="https://youtu.be/CdlVEziXDAQ" class="doc-link">🔊 10th Circuit Oral Argument, Round 1</a>
+        <span class="link-notes" aria-label="Doc 133 notes">
+        </span>
+      </div>
+      <div class="doc-row" id="doc-133">
+        <a href="https://youtu.be/2z7elfVWlqc" class="doc-link">🔊 10th Circuit Oral Argument, Round 2</a>
+        <span class="link-notes" aria-label="Doc 133 notes">
+        </span>
+      </div>
+                    <p style="margin-top: 20px;"><strong>Supporting Evidence:</strong></p>
+                    <a href="#" class="doc-link">📄 Terms & Conditions Revision History (Wayback)</a>
+                    <a href="#" class="doc-link">📄 FBI-Retailer Coordination Emails</a>
+                    <a href="#" class="doc-link">📄 Discovery Items Spreadsheet</a>
+                    <a href="#" class="doc-link">📄 Calendar Analysis (2014 vs 2015)</a>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>Last updated: December 2025</p>
             <p style="margin-top: 10px;">This documentation is provided for journalistic and legal review purposes.</p>
